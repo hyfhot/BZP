@@ -1,0 +1,909 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GJPModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="appaccount">
+          <Key>
+            <PropertyRef Name="appid" />
+          </Key>
+          <Property Name="appid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="appname" Type="varchar" MaxLength="45" />
+          <Property Name="adminuserid" Type="varchar" MaxLength="45" />
+          <Property Name="STATUS" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="building">
+          <Key>
+            <PropertyRef Name="buildid" />
+          </Key>
+          <Property Name="buildid" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="appid" Type="uint" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" />
+          <Property Name="address" Type="varchar" MaxLength="255" />
+          <Property Name="floors" Type="usmallint" />
+          <Property Name="rooms" Type="usmallint" />
+          <Property Name="images" Type="varchar" MaxLength="512" />
+          <Property Name="description" Type="varchar" MaxLength="512" />
+          <Property Name="STATUS" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="calcconfig">
+          <Key>
+            <PropertyRef Name="configid" />
+          </Key>
+          <Property Name="configid" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="appid" Type="uint" Nullable="false" />
+          <Property Name="buildid" Type="uint" Nullable="false" />
+          <Property Name="roomid" Type="uint" Nullable="false" />
+          <Property Name="classid" Type="uint" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="customprice" Type="varchar" MaxLength="512" Nullable="false" />
+          <Property Name="createuserid" Type="uint" />
+          <Property Name="createtime" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="STATUS" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="calcvaluelog">
+          <Key>
+            <PropertyRef Name="calclogid" />
+          </Key>
+          <Property Name="calclogid" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="appid" Type="uint" Nullable="false" />
+          <Property Name="buildid" Type="uint" Nullable="false" />
+          <Property Name="roomid" Type="uint" Nullable="false" />
+          <Property Name="classid" Type="uint" Nullable="false" />
+          <Property Name="year" Type="smallint" Nullable="false" />
+          <Property Name="month" Type="smallint" Nullable="false" />
+          <Property Name="logtime" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="beginday" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="endday" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="value_init" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="value_end" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="value_real" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="customprice" Type="varchar" MaxLength="512" Nullable="false" />
+          <Property Name="money" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="loger_id" Type="uint" Nullable="false" />
+          <Property Name="loger_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="STATUS" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="customerid" />
+          </Key>
+          <Property Name="customerid" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="appid" Type="uint" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="realname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="credentials_type" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="credentials_code" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="credentials_pic" Type="varchar" MaxLength="512" />
+          <Property Name="email" Type="varchar" MaxLength="255" />
+          <Property Name="password" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="mobile" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="home_town" Type="varchar" MaxLength="45" />
+          <Property Name="home_address" Type="varchar" MaxLength="255" />
+          <Property Name="family_contact" Type="varchar" MaxLength="20" />
+          <Property Name="family_mobile" Type="varchar" MaxLength="20" />
+          <Property Name="wechat" Type="varchar" MaxLength="45" />
+          <Property Name="qq" Type="varchar" MaxLength="45" />
+          <Property Name="companyname" Type="varchar" MaxLength="255" />
+          <Property Name="company_address" Type="varchar" MaxLength="45" />
+          <Property Name="company_telephone" Type="varchar" MaxLength="45" />
+          <Property Name="create_time" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" />
+          <Property Name="STATUS" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="financeclass">
+          <Key>
+            <PropertyRef Name="classid" />
+          </Key>
+          <Property Name="classid" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="appid" Type="uint" Nullable="false" />
+          <Property Name="classname" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="calctype" Type="smallint" Nullable="false" />
+          <Property Name="unit" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="customprice" Type="varchar" MaxLength="512" Nullable="false" />
+          <Property Name="isenable" Type="bool" Nullable="false" />
+          <Property Name="STATUS" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="financelog">
+          <Key>
+            <PropertyRef Name="financeid" />
+          </Key>
+          <Property Name="financeid" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="appid" Type="uint" />
+          <Property Name="buildid" Type="uint" />
+          <Property Name="roomid" Type="uint" />
+          <Property Name="customerid" Type="uint" />
+          <Property Name="type" Type="smallint" />
+          <Property Name="calclogid" Type="uint" Nullable="false" />
+          <Property Name="businessid" Type="uint" />
+          <Property Name="money" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="fromaccount" Type="varchar" MaxLength="45" />
+          <Property Name="toaccount" Type="varchar" MaxLength="45" />
+          <Property Name="create_operator_id" Type="int" />
+          <Property Name="create_operator_name" Type="varchar" MaxLength="20" />
+          <Property Name="create_time" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="check_operator_id" Type="int" />
+          <Property Name="check_operator_name" Type="varchar" MaxLength="20" />
+          <Property Name="check_time" Type="datetime" Precision="0" />
+          <Property Name="STATUS" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rent">
+          <Key>
+            <PropertyRef Name="rentid" />
+          </Key>
+          <Property Name="rentid" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="appid" Type="uint" Nullable="false" />
+          <Property Name="buildid" Type="uint" Nullable="false" />
+          <Property Name="roomid" Type="uint" Nullable="false" />
+          <Property Name="pre_date" Type="datetime" Precision="0" />
+          <Property Name="pre_money" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="pre_customername" Type="varchar" MaxLength="45" />
+          <Property Name="pre_credentials_type" Type="varchar" MaxLength="20" />
+          <Property Name="pre_credentials_code" Type="varchar" MaxLength="45" />
+          <Property Name="pre_credentials_pic" Type="varchar" MaxLength="512" />
+          <Property Name="pre_mobile" Type="varchar" MaxLength="20" />
+          <Property Name="pre_expired" Type="datetime" Precision="0" />
+          <Property Name="pre_operator_id" Type="uint" />
+          <Property Name="pre_operator_name" Type="varchar" MaxLength="20" />
+          <Property Name="pre_backmoney" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="pre_back_id" Type="uint" />
+          <Property Name="pre_back_name" Type="varchar" MaxLength="20" />
+          <Property Name="contract_begin" Type="datetime" Precision="0" />
+          <Property Name="contract_end" Type="datetime" Precision="0" />
+          <Property Name="contract_pic" Type="varchar" MaxLength="512" />
+          <Property Name="contract_date" Type="datetime" Precision="0" />
+          <Property Name="contract_memo" Type="varchar" MaxLength="1024" />
+          <Property Name="contract_room_price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="contract_room_pic" Type="varchar" MaxLength="512" />
+          <Property Name="contract_room_pledge" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="contract_room_peoples" Type="smallint" />
+          <Property Name="contract_room_payment" Type="decimal" Precision="4" Scale="1" />
+          <Property Name="contract_water_value" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="contract_elec_value" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="contract_customer_id" Type="uint" />
+          <Property Name="contract_customer_name" Type="varchar" MaxLength="20" />
+          <Property Name="contract_operator_id" Type="uint" />
+          <Property Name="contract_operator_name" Type="varchar" MaxLength="20" />
+          <Property Name="back_date" Type="datetime" Precision="0" />
+          <Property Name="back_water_value" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="back_elec_value" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="back_deduction" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="back_deduction_water" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="back_deduction_elec" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="back_deduction_cleaning" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="back_deduction_mar" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="back_deduction_other" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="back_deduction_memo" Type="varchar" MaxLength="512" />
+          <Property Name="back_money" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="back_memo" Type="varchar" MaxLength="1024" />
+          <Property Name="back_operator_id" Type="uint" />
+          <Property Name="back_operator_name" Type="varchar" MaxLength="20" />
+          <Property Name="transfer_fromid" Type="uint" />
+          <Property Name="transfer_toid" Type="uint" />
+          <Property Name="transfer_money" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="transfer_memo" Type="varchar" MaxLength="1024" />
+          <Property Name="transfer_operator_id" Type="uint" />
+          <Property Name="transfer_operator_name" Type="varchar" MaxLength="20" />
+          <Property Name="rentstatus" Type="smallint" Nullable="false" />
+          <Property Name="STATUS" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rentmonth">
+          <Key>
+            <PropertyRef Name="rentmonthid" />
+          </Key>
+          <Property Name="rentmonthid" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="appid" Type="uint" Nullable="false" />
+          <Property Name="buildid" Type="uint" Nullable="false" />
+          <Property Name="roomid" Type="uint" Nullable="false" />
+          <Property Name="customerid" Type="uint" />
+          <Property Name="year" Type="smallint" Nullable="false" />
+          <Property Name="month" Type="smallint" Nullable="false" />
+          <Property Name="payment_money" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="payment_status" Type="bool" Nullable="false" />
+          <Property Name="payment_type" Type="varchar" MaxLength="45" />
+          <Property Name="calc_operator_id" Type="uint" Nullable="false" />
+          <Property Name="calc_operator_name" Type="varchar" MaxLength="20" />
+          <Property Name="calc_time" Type="datetime" Precision="0" />
+          <Property Name="rent_operator_id" Type="uint" Nullable="false" />
+          <Property Name="rent_operator_name" Type="varchar" MaxLength="20" />
+          <Property Name="rent_time" Type="datetime" Precision="0" />
+          <Property Name="STATUS" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="rolename" />
+          </Key>
+          <Property Name="rolename" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="defaultright" Type="varchar" MaxLength="45" />
+          <Property Name="allright" Type="varchar" MaxLength="45" />
+          <Property Name="rolecol" Type="varchar" MaxLength="45" />
+          <Property Name="description" Type="varchar" MaxLength="512" />
+          <Property Name="STATUS" Type="smallint" />
+        </EntityType>
+        <EntityType Name="rooms">
+          <Key>
+            <PropertyRef Name="roomid" />
+          </Key>
+          <Property Name="roomid" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="appid" Type="uint" Nullable="false" />
+          <Property Name="buildid" Type="uint" Nullable="false" />
+          <Property Name="code" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="roomtype" Type="varchar" MaxLength="45" />
+          <Property Name="packlevel" Type="varchar" MaxLength="20" />
+          <Property Name="direction" Type="varchar" MaxLength="20" />
+          <Property Name="floor" Type="smallint" />
+          <Property Name="area" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="deploy" Type="varchar" MaxLength="128" />
+          <Property Name="images" Type="varchar" MaxLength="512" />
+          <Property Name="pledge" Type="varchar" MaxLength="45" />
+          <Property Name="payment" Type="decimal" Precision="4" Scale="1" />
+          <Property Name="description" Type="varchar" MaxLength="512" />
+          <Property Name="STATUS" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="session">
+          <Key>
+            <PropertyRef Name="sessionid" />
+          </Key>
+          <Property Name="sessionid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="token" Type="varchar" MaxLength="45" />
+          <Property Name="time_connect" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="time_login" Type="datetime" Precision="0" />
+          <Property Name="time_logout" Type="datetime" Precision="0" />
+          <Property Name="appid" Type="uint" />
+          <Property Name="userid" Type="uint" />
+          <Property Name="customerid" Type="uint" />
+          <Property Name="STATUS" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="userid" />
+          </Key>
+          <Property Name="userid" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="appid" Type="uint" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="255" />
+          <Property Name="password" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="realname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="credentials_type" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="credentials_code" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="credentials_pic" Type="varchar" MaxLength="512" />
+          <Property Name="mobile" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="wechat" Type="varchar" MaxLength="45" />
+          <Property Name="qq" Type="varchar" MaxLength="45" />
+          <Property Name="role" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="roleright" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="512" />
+          <Property Name="create_time" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" />
+          <Property Name="STATUS" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="GJPModelStoreContainer">
+          <EntitySet Name="appaccount" EntityType="Self.appaccount" Schema="gjp" store:Type="Tables" />
+          <EntitySet Name="building" EntityType="Self.building" Schema="gjp" store:Type="Tables" />
+          <EntitySet Name="calcconfig" EntityType="Self.calcconfig" Schema="gjp" store:Type="Tables" />
+          <EntitySet Name="calcvaluelog" EntityType="Self.calcvaluelog" Schema="gjp" store:Type="Tables" />
+          <EntitySet Name="customer" EntityType="Self.customer" Schema="gjp" store:Type="Tables" />
+          <EntitySet Name="financeclass" EntityType="Self.financeclass" Schema="gjp" store:Type="Tables" />
+          <EntitySet Name="financelog" EntityType="Self.financelog" Schema="gjp" store:Type="Tables" />
+          <EntitySet Name="rent" EntityType="Self.rent" Schema="gjp" store:Type="Tables" />
+          <EntitySet Name="rentmonth" EntityType="Self.rentmonth" Schema="gjp" store:Type="Tables" />
+          <EntitySet Name="role" EntityType="Self.role" Schema="gjp" store:Type="Tables" />
+          <EntitySet Name="rooms" EntityType="Self.rooms" Schema="gjp" store:Type="Tables" />
+          <EntitySet Name="session" EntityType="Self.session" Schema="gjp" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="gjp" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GJPModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="appaccount" EntityType="GJPModel.appaccount" />
+          <EntitySet Name="building" EntityType="GJPModel.building" />
+          <EntitySet Name="calcconfig" EntityType="GJPModel.calcconfig" />
+          <EntitySet Name="calcvaluelog" EntityType="GJPModel.calcvaluelog" />
+          <EntitySet Name="customer" EntityType="GJPModel.customer" />
+          <EntitySet Name="financeclass" EntityType="GJPModel.financeclass" />
+          <EntitySet Name="financelog" EntityType="GJPModel.financelog" />
+          <EntitySet Name="rent" EntityType="GJPModel.rent" />
+          <EntitySet Name="rentmonth" EntityType="GJPModel.rentmonth" />
+          <EntitySet Name="role" EntityType="GJPModel.role" />
+          <EntitySet Name="rooms" EntityType="GJPModel.rooms" />
+          <EntitySet Name="session" EntityType="GJPModel.session" />
+          <EntitySet Name="user" EntityType="GJPModel.user" />
+        </EntityContainer>
+        <EntityType Name="appaccount">
+          <Key>
+            <PropertyRef Name="appid" />
+          </Key>
+          <Property Name="appid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="appname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="adminuserid" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS" Type="Int16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="building">
+          <Key>
+            <PropertyRef Name="buildid" />
+          </Key>
+          <Property Name="buildid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="appid" Type="Int64" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="floors" Type="Int32" />
+          <Property Name="rooms" Type="Int32" />
+          <Property Name="images" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS" Type="Int16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="calcconfig">
+          <Key>
+            <PropertyRef Name="configid" />
+          </Key>
+          <Property Name="configid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="appid" Type="Int64" Nullable="false" />
+          <Property Name="buildid" Type="Int64" Nullable="false" />
+          <Property Name="roomid" Type="Int64" Nullable="false" />
+          <Property Name="classid" Type="Int64" Nullable="false" />
+          <Property Name="price" Type="Decimal" Nullable="false" />
+          <Property Name="customprice" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="createuserid" Type="Int64" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="STATUS" Type="Int16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="calcvaluelog">
+          <Key>
+            <PropertyRef Name="calclogid" />
+          </Key>
+          <Property Name="calclogid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="appid" Type="Int64" Nullable="false" />
+          <Property Name="buildid" Type="Int64" Nullable="false" />
+          <Property Name="roomid" Type="Int64" Nullable="false" />
+          <Property Name="classid" Type="Int64" Nullable="false" />
+          <Property Name="year" Type="Int16" Nullable="false" />
+          <Property Name="month" Type="Int16" Nullable="false" />
+          <Property Name="logtime" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="beginday" Type="DateTime" Nullable="false" />
+          <Property Name="endday" Type="DateTime" Nullable="false" />
+          <Property Name="value_init" Type="Decimal" />
+          <Property Name="value_end" Type="Decimal" />
+          <Property Name="value_real" Type="Decimal" />
+          <Property Name="price" Type="Decimal" Nullable="false" />
+          <Property Name="customprice" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="money" Type="Decimal" Nullable="false" />
+          <Property Name="loger_id" Type="Int64" Nullable="false" />
+          <Property Name="loger_name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS" Type="Int16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="customerid" />
+          </Key>
+          <Property Name="customerid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="appid" Type="Int64" Nullable="false" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="realname" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="credentials_type" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="credentials_code" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="credentials_pic" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="mobile" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="home_town" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="home_address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="family_contact" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="family_mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="wechat" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="qq" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="companyname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="company_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="company_telephone" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="create_time" Type="DateTime" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="STATUS" Type="Int16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="financeclass">
+          <Key>
+            <PropertyRef Name="classid" />
+          </Key>
+          <Property Name="classid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="appid" Type="Int64" Nullable="false" />
+          <Property Name="classname" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="calctype" Type="Int16" Nullable="false" />
+          <Property Name="unit" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Decimal" Nullable="false" />
+          <Property Name="customprice" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="isenable" Type="Boolean" Nullable="false" />
+          <Property Name="STATUS" Type="Int16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="financelog">
+          <Key>
+            <PropertyRef Name="financeid" />
+          </Key>
+          <Property Name="financeid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="appid" Type="Int64" />
+          <Property Name="buildid" Type="Int64" />
+          <Property Name="roomid" Type="Int64" />
+          <Property Name="customerid" Type="Int64" />
+          <Property Name="type" Type="Int16" />
+          <Property Name="calclogid" Type="Int64" Nullable="false" />
+          <Property Name="businessid" Type="Int64" />
+          <Property Name="money" Type="Decimal" />
+          <Property Name="fromaccount" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="toaccount" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="create_operator_id" Type="Int32" />
+          <Property Name="create_operator_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="create_time" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="check_operator_id" Type="Int32" />
+          <Property Name="check_operator_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="check_time" Type="DateTime" />
+          <Property Name="STATUS" Type="Int16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rent">
+          <Key>
+            <PropertyRef Name="rentid" />
+          </Key>
+          <Property Name="rentid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="appid" Type="Int64" Nullable="false" />
+          <Property Name="buildid" Type="Int64" Nullable="false" />
+          <Property Name="roomid" Type="Int64" Nullable="false" />
+          <Property Name="pre_date" Type="DateTime" />
+          <Property Name="pre_money" Type="Decimal" />
+          <Property Name="pre_customername" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="pre_credentials_type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pre_credentials_code" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="pre_credentials_pic" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="pre_mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pre_expired" Type="DateTime" />
+          <Property Name="pre_operator_id" Type="Int64" />
+          <Property Name="pre_operator_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pre_backmoney" Type="Decimal" />
+          <Property Name="pre_back_id" Type="Int64" />
+          <Property Name="pre_back_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="contract_begin" Type="DateTime" />
+          <Property Name="contract_end" Type="DateTime" />
+          <Property Name="contract_pic" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="contract_date" Type="DateTime" />
+          <Property Name="contract_memo" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Name="contract_room_price" Type="Decimal" />
+          <Property Name="contract_room_pic" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="contract_room_pledge" Type="Decimal" />
+          <Property Name="contract_room_peoples" Type="Int16" />
+          <Property Name="contract_room_payment" Type="Decimal" />
+          <Property Name="contract_water_value" Type="Decimal" />
+          <Property Name="contract_elec_value" Type="Decimal" />
+          <Property Name="contract_customer_id" Type="Int64" />
+          <Property Name="contract_customer_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="contract_operator_id" Type="Int64" />
+          <Property Name="contract_operator_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="back_date" Type="DateTime" />
+          <Property Name="back_water_value" Type="Decimal" />
+          <Property Name="back_elec_value" Type="Decimal" />
+          <Property Name="back_deduction" Type="Decimal" />
+          <Property Name="back_deduction_water" Type="Decimal" />
+          <Property Name="back_deduction_elec" Type="Decimal" />
+          <Property Name="back_deduction_cleaning" Type="Decimal" />
+          <Property Name="back_deduction_mar" Type="Decimal" />
+          <Property Name="back_deduction_other" Type="Decimal" />
+          <Property Name="back_deduction_memo" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="back_money" Type="Decimal" />
+          <Property Name="back_memo" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Name="back_operator_id" Type="Int64" />
+          <Property Name="back_operator_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="transfer_fromid" Type="Int64" />
+          <Property Name="transfer_toid" Type="Int64" />
+          <Property Name="transfer_money" Type="Decimal" />
+          <Property Name="transfer_memo" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Name="transfer_operator_id" Type="Int64" />
+          <Property Name="transfer_operator_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="rentstatus" Type="Int16" Nullable="false" />
+          <Property Name="STATUS" Type="Int16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rentmonth">
+          <Key>
+            <PropertyRef Name="rentmonthid" />
+          </Key>
+          <Property Name="rentmonthid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="appid" Type="Int64" Nullable="false" />
+          <Property Name="buildid" Type="Int64" Nullable="false" />
+          <Property Name="roomid" Type="Int64" Nullable="false" />
+          <Property Name="customerid" Type="Int64" />
+          <Property Name="year" Type="Int16" Nullable="false" />
+          <Property Name="month" Type="Int16" Nullable="false" />
+          <Property Name="payment_money" Type="Decimal" Nullable="false" />
+          <Property Name="payment_status" Type="Boolean" Nullable="false" />
+          <Property Name="payment_type" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="calc_operator_id" Type="Int64" Nullable="false" />
+          <Property Name="calc_operator_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="calc_time" Type="DateTime" />
+          <Property Name="rent_operator_id" Type="Int64" Nullable="false" />
+          <Property Name="rent_operator_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="rent_time" Type="DateTime" />
+          <Property Name="STATUS" Type="Int16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="rolename" />
+          </Key>
+          <Property Name="rolename" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="defaultright" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="allright" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="rolecol" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS" Type="Int16" />
+        </EntityType>
+        <EntityType Name="rooms">
+          <Key>
+            <PropertyRef Name="roomid" />
+          </Key>
+          <Property Name="roomid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="appid" Type="Int64" Nullable="false" />
+          <Property Name="buildid" Type="Int64" Nullable="false" />
+          <Property Name="code" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="roomtype" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="packlevel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="direction" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="floor" Type="Int16" />
+          <Property Name="area" Type="Decimal" />
+          <Property Name="price" Type="Decimal" />
+          <Property Name="deploy" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="images" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="pledge" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="payment" Type="Decimal" />
+          <Property Name="description" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS" Type="Int16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="session">
+          <Key>
+            <PropertyRef Name="sessionid" />
+          </Key>
+          <Property Name="sessionid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="token" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="time_connect" Type="DateTime" Nullable="false" />
+          <Property Name="time_login" Type="DateTime" />
+          <Property Name="time_logout" Type="DateTime" />
+          <Property Name="appid" Type="Int64" />
+          <Property Name="userid" Type="Int64" />
+          <Property Name="customerid" Type="Int64" />
+          <Property Name="STATUS" Type="Int16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="userid" />
+          </Key>
+          <Property Name="userid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="appid" Type="Int64" Nullable="false" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="realname" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="credentials_type" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="credentials_code" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="credentials_pic" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="mobile" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="wechat" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="qq" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="role" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="roleright" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="create_time" Type="DateTime" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="STATUS" Type="Int16" Nullable="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GJPModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="appaccount">
+            <EntityTypeMapping TypeName="GJPModel.appaccount">
+              <MappingFragment StoreEntitySet="appaccount">
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="adminuserid" ColumnName="adminuserid" />
+                <ScalarProperty Name="appname" ColumnName="appname" />
+                <ScalarProperty Name="appid" ColumnName="appid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="building">
+            <EntityTypeMapping TypeName="GJPModel.building">
+              <MappingFragment StoreEntitySet="building">
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="images" ColumnName="images" />
+                <ScalarProperty Name="rooms" ColumnName="rooms" />
+                <ScalarProperty Name="floors" ColumnName="floors" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="appid" ColumnName="appid" />
+                <ScalarProperty Name="buildid" ColumnName="buildid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="calcconfig">
+            <EntityTypeMapping TypeName="GJPModel.calcconfig">
+              <MappingFragment StoreEntitySet="calcconfig">
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="createuserid" ColumnName="createuserid" />
+                <ScalarProperty Name="customprice" ColumnName="customprice" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="classid" ColumnName="classid" />
+                <ScalarProperty Name="roomid" ColumnName="roomid" />
+                <ScalarProperty Name="buildid" ColumnName="buildid" />
+                <ScalarProperty Name="appid" ColumnName="appid" />
+                <ScalarProperty Name="configid" ColumnName="configid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="calcvaluelog">
+            <EntityTypeMapping TypeName="GJPModel.calcvaluelog">
+              <MappingFragment StoreEntitySet="calcvaluelog">
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="loger_name" ColumnName="loger_name" />
+                <ScalarProperty Name="loger_id" ColumnName="loger_id" />
+                <ScalarProperty Name="money" ColumnName="money" />
+                <ScalarProperty Name="customprice" ColumnName="customprice" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="value_real" ColumnName="value_real" />
+                <ScalarProperty Name="value_end" ColumnName="value_end" />
+                <ScalarProperty Name="value_init" ColumnName="value_init" />
+                <ScalarProperty Name="endday" ColumnName="endday" />
+                <ScalarProperty Name="beginday" ColumnName="beginday" />
+                <ScalarProperty Name="logtime" ColumnName="logtime" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="classid" ColumnName="classid" />
+                <ScalarProperty Name="roomid" ColumnName="roomid" />
+                <ScalarProperty Name="buildid" ColumnName="buildid" />
+                <ScalarProperty Name="appid" ColumnName="appid" />
+                <ScalarProperty Name="calclogid" ColumnName="calclogid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="customer">
+            <EntityTypeMapping TypeName="GJPModel.customer">
+              <MappingFragment StoreEntitySet="customer">
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="create_time" ColumnName="create_time" />
+                <ScalarProperty Name="company_telephone" ColumnName="company_telephone" />
+                <ScalarProperty Name="company_address" ColumnName="company_address" />
+                <ScalarProperty Name="companyname" ColumnName="companyname" />
+                <ScalarProperty Name="qq" ColumnName="qq" />
+                <ScalarProperty Name="wechat" ColumnName="wechat" />
+                <ScalarProperty Name="family_mobile" ColumnName="family_mobile" />
+                <ScalarProperty Name="family_contact" ColumnName="family_contact" />
+                <ScalarProperty Name="home_address" ColumnName="home_address" />
+                <ScalarProperty Name="home_town" ColumnName="home_town" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="credentials_pic" ColumnName="credentials_pic" />
+                <ScalarProperty Name="credentials_code" ColumnName="credentials_code" />
+                <ScalarProperty Name="credentials_type" ColumnName="credentials_type" />
+                <ScalarProperty Name="realname" ColumnName="realname" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="appid" ColumnName="appid" />
+                <ScalarProperty Name="customerid" ColumnName="customerid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="financeclass">
+            <EntityTypeMapping TypeName="GJPModel.financeclass">
+              <MappingFragment StoreEntitySet="financeclass">
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="isenable" ColumnName="isenable" />
+                <ScalarProperty Name="customprice" ColumnName="customprice" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="calctype" ColumnName="calctype" />
+                <ScalarProperty Name="classname" ColumnName="classname" />
+                <ScalarProperty Name="appid" ColumnName="appid" />
+                <ScalarProperty Name="classid" ColumnName="classid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="financelog">
+            <EntityTypeMapping TypeName="GJPModel.financelog">
+              <MappingFragment StoreEntitySet="financelog">
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="check_time" ColumnName="check_time" />
+                <ScalarProperty Name="check_operator_name" ColumnName="check_operator_name" />
+                <ScalarProperty Name="check_operator_id" ColumnName="check_operator_id" />
+                <ScalarProperty Name="create_time" ColumnName="create_time" />
+                <ScalarProperty Name="create_operator_name" ColumnName="create_operator_name" />
+                <ScalarProperty Name="create_operator_id" ColumnName="create_operator_id" />
+                <ScalarProperty Name="toaccount" ColumnName="toaccount" />
+                <ScalarProperty Name="fromaccount" ColumnName="fromaccount" />
+                <ScalarProperty Name="money" ColumnName="money" />
+                <ScalarProperty Name="businessid" ColumnName="businessid" />
+                <ScalarProperty Name="calclogid" ColumnName="calclogid" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="customerid" ColumnName="customerid" />
+                <ScalarProperty Name="roomid" ColumnName="roomid" />
+                <ScalarProperty Name="buildid" ColumnName="buildid" />
+                <ScalarProperty Name="appid" ColumnName="appid" />
+                <ScalarProperty Name="financeid" ColumnName="financeid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rent">
+            <EntityTypeMapping TypeName="GJPModel.rent">
+              <MappingFragment StoreEntitySet="rent">
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="rentstatus" ColumnName="rentstatus" />
+                <ScalarProperty Name="transfer_operator_name" ColumnName="transfer_operator_name" />
+                <ScalarProperty Name="transfer_operator_id" ColumnName="transfer_operator_id" />
+                <ScalarProperty Name="transfer_memo" ColumnName="transfer_memo" />
+                <ScalarProperty Name="transfer_money" ColumnName="transfer_money" />
+                <ScalarProperty Name="transfer_toid" ColumnName="transfer_toid" />
+                <ScalarProperty Name="transfer_fromid" ColumnName="transfer_fromid" />
+                <ScalarProperty Name="back_operator_name" ColumnName="back_operator_name" />
+                <ScalarProperty Name="back_operator_id" ColumnName="back_operator_id" />
+                <ScalarProperty Name="back_memo" ColumnName="back_memo" />
+                <ScalarProperty Name="back_money" ColumnName="back_money" />
+                <ScalarProperty Name="back_deduction_memo" ColumnName="back_deduction_memo" />
+                <ScalarProperty Name="back_deduction_other" ColumnName="back_deduction_other" />
+                <ScalarProperty Name="back_deduction_mar" ColumnName="back_deduction_mar" />
+                <ScalarProperty Name="back_deduction_cleaning" ColumnName="back_deduction_cleaning" />
+                <ScalarProperty Name="back_deduction_elec" ColumnName="back_deduction_elec" />
+                <ScalarProperty Name="back_deduction_water" ColumnName="back_deduction_water" />
+                <ScalarProperty Name="back_deduction" ColumnName="back_deduction" />
+                <ScalarProperty Name="back_elec_value" ColumnName="back_elec_value" />
+                <ScalarProperty Name="back_water_value" ColumnName="back_water_value" />
+                <ScalarProperty Name="back_date" ColumnName="back_date" />
+                <ScalarProperty Name="contract_operator_name" ColumnName="contract_operator_name" />
+                <ScalarProperty Name="contract_operator_id" ColumnName="contract_operator_id" />
+                <ScalarProperty Name="contract_customer_name" ColumnName="contract_customer_name" />
+                <ScalarProperty Name="contract_customer_id" ColumnName="contract_customer_id" />
+                <ScalarProperty Name="contract_elec_value" ColumnName="contract_elec_value" />
+                <ScalarProperty Name="contract_water_value" ColumnName="contract_water_value" />
+                <ScalarProperty Name="contract_room_payment" ColumnName="contract_room_payment" />
+                <ScalarProperty Name="contract_room_peoples" ColumnName="contract_room_peoples" />
+                <ScalarProperty Name="contract_room_pledge" ColumnName="contract_room_pledge" />
+                <ScalarProperty Name="contract_room_pic" ColumnName="contract_room_pic" />
+                <ScalarProperty Name="contract_room_price" ColumnName="contract_room_price" />
+                <ScalarProperty Name="contract_memo" ColumnName="contract_memo" />
+                <ScalarProperty Name="contract_date" ColumnName="contract_date" />
+                <ScalarProperty Name="contract_pic" ColumnName="contract_pic" />
+                <ScalarProperty Name="contract_end" ColumnName="contract_end" />
+                <ScalarProperty Name="contract_begin" ColumnName="contract_begin" />
+                <ScalarProperty Name="pre_back_name" ColumnName="pre_back_name" />
+                <ScalarProperty Name="pre_back_id" ColumnName="pre_back_id" />
+                <ScalarProperty Name="pre_backmoney" ColumnName="pre_backmoney" />
+                <ScalarProperty Name="pre_operator_name" ColumnName="pre_operator_name" />
+                <ScalarProperty Name="pre_operator_id" ColumnName="pre_operator_id" />
+                <ScalarProperty Name="pre_expired" ColumnName="pre_expired" />
+                <ScalarProperty Name="pre_mobile" ColumnName="pre_mobile" />
+                <ScalarProperty Name="pre_credentials_pic" ColumnName="pre_credentials_pic" />
+                <ScalarProperty Name="pre_credentials_code" ColumnName="pre_credentials_code" />
+                <ScalarProperty Name="pre_credentials_type" ColumnName="pre_credentials_type" />
+                <ScalarProperty Name="pre_customername" ColumnName="pre_customername" />
+                <ScalarProperty Name="pre_money" ColumnName="pre_money" />
+                <ScalarProperty Name="pre_date" ColumnName="pre_date" />
+                <ScalarProperty Name="roomid" ColumnName="roomid" />
+                <ScalarProperty Name="buildid" ColumnName="buildid" />
+                <ScalarProperty Name="appid" ColumnName="appid" />
+                <ScalarProperty Name="rentid" ColumnName="rentid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rentmonth">
+            <EntityTypeMapping TypeName="GJPModel.rentmonth">
+              <MappingFragment StoreEntitySet="rentmonth">
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="rent_time" ColumnName="rent_time" />
+                <ScalarProperty Name="rent_operator_name" ColumnName="rent_operator_name" />
+                <ScalarProperty Name="rent_operator_id" ColumnName="rent_operator_id" />
+                <ScalarProperty Name="calc_time" ColumnName="calc_time" />
+                <ScalarProperty Name="calc_operator_name" ColumnName="calc_operator_name" />
+                <ScalarProperty Name="calc_operator_id" ColumnName="calc_operator_id" />
+                <ScalarProperty Name="payment_type" ColumnName="payment_type" />
+                <ScalarProperty Name="payment_status" ColumnName="payment_status" />
+                <ScalarProperty Name="payment_money" ColumnName="payment_money" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="customerid" ColumnName="customerid" />
+                <ScalarProperty Name="roomid" ColumnName="roomid" />
+                <ScalarProperty Name="buildid" ColumnName="buildid" />
+                <ScalarProperty Name="appid" ColumnName="appid" />
+                <ScalarProperty Name="rentmonthid" ColumnName="rentmonthid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="role">
+            <EntityTypeMapping TypeName="GJPModel.role">
+              <MappingFragment StoreEntitySet="role">
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="rolecol" ColumnName="rolecol" />
+                <ScalarProperty Name="allright" ColumnName="allright" />
+                <ScalarProperty Name="defaultright" ColumnName="defaultright" />
+                <ScalarProperty Name="rolename" ColumnName="rolename" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rooms">
+            <EntityTypeMapping TypeName="GJPModel.rooms">
+              <MappingFragment StoreEntitySet="rooms">
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="payment" ColumnName="payment" />
+                <ScalarProperty Name="pledge" ColumnName="pledge" />
+                <ScalarProperty Name="images" ColumnName="images" />
+                <ScalarProperty Name="deploy" ColumnName="deploy" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="area" ColumnName="area" />
+                <ScalarProperty Name="floor" ColumnName="floor" />
+                <ScalarProperty Name="direction" ColumnName="direction" />
+                <ScalarProperty Name="packlevel" ColumnName="packlevel" />
+                <ScalarProperty Name="roomtype" ColumnName="roomtype" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="buildid" ColumnName="buildid" />
+                <ScalarProperty Name="appid" ColumnName="appid" />
+                <ScalarProperty Name="roomid" ColumnName="roomid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="session">
+            <EntityTypeMapping TypeName="GJPModel.session">
+              <MappingFragment StoreEntitySet="session">
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="customerid" ColumnName="customerid" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="appid" ColumnName="appid" />
+                <ScalarProperty Name="time_logout" ColumnName="time_logout" />
+                <ScalarProperty Name="time_login" ColumnName="time_login" />
+                <ScalarProperty Name="time_connect" ColumnName="time_connect" />
+                <ScalarProperty Name="token" ColumnName="token" />
+                <ScalarProperty Name="sessionid" ColumnName="sessionid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user">
+            <EntityTypeMapping TypeName="GJPModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="create_time" ColumnName="create_time" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="roleright" ColumnName="roleright" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="qq" ColumnName="qq" />
+                <ScalarProperty Name="wechat" ColumnName="wechat" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="credentials_pic" ColumnName="credentials_pic" />
+                <ScalarProperty Name="credentials_code" ColumnName="credentials_code" />
+                <ScalarProperty Name="credentials_type" ColumnName="credentials_type" />
+                <ScalarProperty Name="realname" ColumnName="realname" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="appid" ColumnName="appid" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
