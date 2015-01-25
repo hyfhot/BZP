@@ -9,9 +9,9 @@
           <Key>
             <PropertyRef Name="appid" />
           </Key>
-          <Property Name="appid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="appid" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="appname" Type="varchar" MaxLength="45" />
-          <Property Name="adminuserid" Type="varchar" MaxLength="45" />
+          <Property Name="adminuserid" Type="uint" Nullable="false" />
           <Property Name="STATUS" Type="smallint" Nullable="false" />
         </EntityType>
         <EntityType Name="building">
@@ -231,6 +231,7 @@
           <Property Name="appid" Type="uint" Nullable="false" />
           <Property Name="buildid" Type="uint" Nullable="false" />
           <Property Name="code" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="customerid" Type="uint" Nullable="false" />
           <Property Name="roomtype" Type="varchar" MaxLength="45" />
           <Property Name="packlevel" Type="varchar" MaxLength="20" />
           <Property Name="direction" Type="varchar" MaxLength="20" />
@@ -248,9 +249,10 @@
           <Key>
             <PropertyRef Name="sessionid" />
           </Key>
-          <Property Name="sessionid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="token" Type="varchar" MaxLength="45" />
-          <Property Name="time_connect" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="sessionid" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rndstr" Type="varchar" MaxLength="45" />
+          <Property Name="token" Type="varchar" MaxLength="128" />
+          <Property Name="time_connect" Type="datetime" Precision="0" />
           <Property Name="time_login" Type="datetime" Precision="0" />
           <Property Name="time_logout" Type="datetime" Precision="0" />
           <Property Name="appid" Type="uint" />
@@ -300,7 +302,6 @@
     <edmx:ConceptualModels>
       <Schema Namespace="GJPModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="appaccount" EntityType="GJPModel.appaccount" />
           <EntitySet Name="building" EntityType="GJPModel.building" />
           <EntitySet Name="calcconfig" EntityType="GJPModel.calcconfig" />
           <EntitySet Name="calcvaluelog" EntityType="GJPModel.calcvaluelog" />
@@ -311,18 +312,10 @@
           <EntitySet Name="rentmonth" EntityType="GJPModel.rentmonth" />
           <EntitySet Name="role" EntityType="GJPModel.role" />
           <EntitySet Name="rooms" EntityType="GJPModel.rooms" />
-          <EntitySet Name="session" EntityType="GJPModel.session" />
           <EntitySet Name="user" EntityType="GJPModel.user" />
+          <EntitySet Name="session" EntityType="GJPModel.session" />
+          <EntitySet Name="appaccount" EntityType="GJPModel.appaccount" />
         </EntityContainer>
-        <EntityType Name="appaccount">
-          <Key>
-            <PropertyRef Name="appid" />
-          </Key>
-          <Property Name="appid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="appname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="adminuserid" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="STATUS" Type="Int16" Nullable="false" />
-        </EntityType>
         <EntityType Name="building">
           <Key>
             <PropertyRef Name="buildid" />
@@ -552,20 +545,7 @@
           <Property Name="payment" Type="Decimal" />
           <Property Name="description" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
           <Property Name="STATUS" Type="Int16" Nullable="false" />
-        </EntityType>
-        <EntityType Name="session">
-          <Key>
-            <PropertyRef Name="sessionid" />
-          </Key>
-          <Property Name="sessionid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="token" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="time_connect" Type="DateTime" Nullable="false" />
-          <Property Name="time_login" Type="DateTime" />
-          <Property Name="time_logout" Type="DateTime" />
-          <Property Name="appid" Type="Int64" />
-          <Property Name="userid" Type="Int64" />
-          <Property Name="customerid" Type="Int64" />
-          <Property Name="STATUS" Type="Int16" Nullable="false" />
+          <Property Name="customerid" Type="Int64" Nullable="false" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -589,22 +569,36 @@
           <Property Name="create_time" Type="DateTime" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="STATUS" Type="Int16" Nullable="false" />
         </EntityType>
+        <EntityType Name="session">
+          <Key>
+            <PropertyRef Name="sessionid" />
+          </Key>
+          <Property Name="sessionid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rndstr" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="token" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="time_connect" Type="DateTime" />
+          <Property Name="time_login" Type="DateTime" />
+          <Property Name="time_logout" Type="DateTime" />
+          <Property Name="appid" Type="Int64" />
+          <Property Name="userid" Type="Int64" />
+          <Property Name="customerid" Type="Int64" />
+          <Property Name="STATUS" Type="Int16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="appaccount">
+          <Key>
+            <PropertyRef Name="appid" />
+          </Key>
+          <Property Name="appid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="appname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="adminuserid" Type="Int64" Nullable="false" />
+          <Property Name="STATUS" Type="Int16" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="GJPModelStoreContainer" CdmEntityContainer="Entities">
-          <EntitySetMapping Name="appaccount">
-            <EntityTypeMapping TypeName="GJPModel.appaccount">
-              <MappingFragment StoreEntitySet="appaccount">
-                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
-                <ScalarProperty Name="adminuserid" ColumnName="adminuserid" />
-                <ScalarProperty Name="appname" ColumnName="appname" />
-                <ScalarProperty Name="appid" ColumnName="appid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="building">
             <EntityTypeMapping TypeName="GJPModel.building">
               <MappingFragment StoreEntitySet="building">
@@ -826,6 +820,7 @@
           <EntitySetMapping Name="rooms">
             <EntityTypeMapping TypeName="GJPModel.rooms">
               <MappingFragment StoreEntitySet="rooms">
+                <ScalarProperty Name="customerid" ColumnName="customerid" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="payment" ColumnName="payment" />
@@ -842,21 +837,6 @@
                 <ScalarProperty Name="buildid" ColumnName="buildid" />
                 <ScalarProperty Name="appid" ColumnName="appid" />
                 <ScalarProperty Name="roomid" ColumnName="roomid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="session">
-            <EntityTypeMapping TypeName="GJPModel.session">
-              <MappingFragment StoreEntitySet="session">
-                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
-                <ScalarProperty Name="customerid" ColumnName="customerid" />
-                <ScalarProperty Name="userid" ColumnName="userid" />
-                <ScalarProperty Name="appid" ColumnName="appid" />
-                <ScalarProperty Name="time_logout" ColumnName="time_logout" />
-                <ScalarProperty Name="time_login" ColumnName="time_login" />
-                <ScalarProperty Name="time_connect" ColumnName="time_connect" />
-                <ScalarProperty Name="token" ColumnName="token" />
-                <ScalarProperty Name="sessionid" ColumnName="sessionid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -880,6 +860,32 @@
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="appid" ColumnName="appid" />
                 <ScalarProperty Name="userid" ColumnName="userid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="session">
+            <EntityTypeMapping TypeName="GJPModel.session">
+              <MappingFragment StoreEntitySet="session">
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="customerid" ColumnName="customerid" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="appid" ColumnName="appid" />
+                <ScalarProperty Name="time_logout" ColumnName="time_logout" />
+                <ScalarProperty Name="time_login" ColumnName="time_login" />
+                <ScalarProperty Name="time_connect" ColumnName="time_connect" />
+                <ScalarProperty Name="token" ColumnName="token" />
+                <ScalarProperty Name="rndstr" ColumnName="rndstr" />
+                <ScalarProperty Name="sessionid" ColumnName="sessionid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="appaccount">
+            <EntityTypeMapping TypeName="GJPModel.appaccount">
+              <MappingFragment StoreEntitySet="appaccount">
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="adminuserid" ColumnName="adminuserid" />
+                <ScalarProperty Name="appname" ColumnName="appname" />
+                <ScalarProperty Name="appid" ColumnName="appid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

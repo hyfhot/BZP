@@ -15,8 +15,9 @@ namespace DAL
     public partial class session
     {
         public long sessionid { get; set; }
+        public string rndstr { get; set; }
         public string token { get; set; }
-        public System.DateTime time_connect { get; set; }
+        public Nullable<System.DateTime> time_connect { get; set; }
         public Nullable<System.DateTime> time_login { get; set; }
         public Nullable<System.DateTime> time_logout { get; set; }
         public Nullable<long> appid { get; set; }

@@ -49,7 +49,7 @@
     <Compile Include="Building.cs" />
     <Compile Include="Finance.cs" />
     <Compile Include="FinanceClass.cs" />
-    <Compile Include="Helper\String.cs" />
+    <Compile Include="Helper\StringLib.cs" />
     <Compile Include="Lib\CalcFun\CalcFactory.cs" />
     <Compile Include="Lib\CalcFun\CalcValue.cs" />
     <Compile Include="Lib\CalcFun\ICalculator.cs" />

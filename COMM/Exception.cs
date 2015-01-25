@@ -15,6 +15,8 @@ namespace COMM
         DB_ROOM_RECORD_NOEXIST = 1004,
         DB_CALCCONFIG_RECORD_NOEXIST = 1005,
         DB_RENT_RECORD_NOEXIST = 1006,
+        DB_APP_NEWACCOUNT_ERROR = 1007,
+        DB_USER_LOGIN_ERROR = 1008,
         #endregion
         #region 配置错误代码常量
         CF_CALCCONFIG_CUSTOMPRICE_INVALID = 2001,
@@ -26,11 +28,26 @@ namespace COMM
         OP_CALCCONFIG_MODIFY_CANT = 3011,
         #endregion
         #region 认证错误代码常量
+        /// <summary>
+        /// 未登陆
+        /// </summary>
         AU_LOGIN_NO = 4001,
+        /// <summary>
+        /// 登陆错误，用户名或密码错误
+        /// </summary>
+        AU_LOGIN_ERROR = 4002,
         #endregion
         #region 系统错误代码常量
         //无法保存日志
         SY_LOG_CANTWRITE = 5001,
+        //未连接服务器获取令牌
+        SY_CONNECT_UNDO = 5002,
+        //未获取手机验证码
+        SY_REGISTER_UNGETCODE = 5003,
+        //手机验证码错误
+        SY_REGISTER_ERRORCODE = 5004,
+        //无法识别的错误
+        SY_UNKNOW = 5999,
         #endregion
     }
 
@@ -104,6 +121,29 @@ namespace COMM
 
         private ErrorType _errtype;
         private ErrorCode _errcode;
+
+        public ErrorType ErrType {
+            get
+            {
+                return _errtype;
+            }
+        }
+
+        public ErrorCode ErrCode
+        {
+            get
+            {
+                return _errcode;
+            }
+        }
+
+        public string ErrMsg
+        {
+            get
+            {
+                return this.Message;
+            }
+        }
 
         public BLLException(ErrorType type, ErrorCode errcode, string errmsg, Exception inner = null)
             : base(errmsg, inner)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web;
 
 namespace COMM
 {
@@ -18,10 +19,21 @@ namespace COMM
         public FileLoger(string fileflag = "_", string fileext = "log")
         {
             this.path = string.Format("{0}\\log", Environment.CurrentDirectory);
-            if (!System.IO.Directory.Exists(path))
+            try
             {
-                System.IO.Directory.CreateDirectory(path);
+                if (!System.IO.Directory.Exists(path))
+                {
+                    System.IO.Directory.CreateDirectory(path);
+                }
             }
+            catch {
+                    this.path = System.AppDomain.CurrentDomain.BaseDirectory;
+                    if (!System.IO.Directory.Exists(path))
+                    {
+                        System.IO.Directory.CreateDirectory(path);
+                    }
+            }
+
 
             this.fileflag = fileflag;
             this.fileext = fileext;

@@ -14,9 +14,9 @@ namespace DAL
     
     public partial class appaccount
     {
-        public int appid { get; set; }
+        public long appid { get; set; }
         public string appname { get; set; }
-        public string adminuserid { get; set; }
+        public long adminuserid { get; set; }
         public short STATUS { get; set; }
     }
 }

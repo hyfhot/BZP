@@ -21,6 +21,8 @@ namespace COMM
         #endregion
         #region 认证警告代码常量
         AU_LOGIN_NO = 4001,
+        AU_LOGIN_PASSWORD_ERR = 4002,
+        AU_REGISTER_VERIFYCODE_ERR = 4003,
         #endregion
         #region 系统警告代码常量
         //无法保存日志
@@ -86,23 +88,47 @@ namespace COMM
         {
             string strlog = "";
             if (warn.innerException == null)
-                strlog = string.Format("WARNING#{0}#{1}#{2}#{3}", DateTime.Now.ToShortTimeString(), warn.warntype.ToString(), warn.warncode.ToString(), warn.warnmsg);
+                strlog = string.Format("WARNING#{0}#{1}#{2}#{3}", DateTime.Now.ToShortTimeString(), warn._warntype.ToString(), warn._warncode.ToString(), warn._warnmsg);
             else
-                strlog = string.Format("WARNING#{0}#{1}#{2}#{3}#{4}#{5}", DateTime.Now.ToShortTimeString(), warn.warntype.ToString(), warn.warncode.ToString(), warn.warnmsg, warn.innerException.Message, warn.innerException.StackTrace);
+                strlog = string.Format("WARNING#{0}#{1}#{2}#{3}#{4}#{5}", DateTime.Now.ToShortTimeString(), warn._warntype.ToString(), warn._warncode.ToString(), warn._warnmsg, warn.innerException.Message, warn.innerException.StackTrace);
 
             FileLoger.ErrorLoger.AddLog(strlog);
         }
 
-        private WarnType warntype;
-        private WarnCode warncode;
-        private string warnmsg;
+        private WarnType _warntype;
+        private WarnCode _warncode;
+        private string _warnmsg;
         private Exception innerException;
+
+        public WarnType WarnType
+        {
+            get
+            {
+                return _warntype;
+            }
+        }
+
+        public WarnCode WarnCode
+        {
+            get
+            {
+                return _warncode;
+            }
+        }
+
+        public string WarnMsg
+        {
+            get
+            {
+                return _warnmsg;
+            }
+        }
 
         public Warning(WarnType warntype, WarnCode warncode, string warnmsg, Exception innerException = null)
         {
-            this.warntype = warntype;
-            this.warncode = warncode;
-            this.warnmsg = warnmsg;
+            this._warntype = warntype;
+            this._warncode = warncode;
+            this._warnmsg = warnmsg;
             this.innerException = innerException;
 
             Warning.AddWarning(this);

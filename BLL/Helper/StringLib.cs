@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace BLL.Helper
 {
-    public class String
+    public class StringLib
     {
         /// <summary>
         /// 获取指定长度的随机字符串
@@ -25,6 +26,18 @@ namespace BLL.Helper
                 result += s;
             }
             return result;
+        }
+
+        /// <summary>
+        /// 使用MD5进行加密
+        /// </summary>
+        /// <param name="scr">待加密字符串</param>
+        /// <returns></returns>
+        public static string MD5Encrypt(string scr)
+        {
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] result = md5.ComputeHash(System.Text.Encoding.Default.GetBytes(scr));
+            return System.Text.Encoding.Default.GetString(result);
         }
     }
 }

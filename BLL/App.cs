@@ -14,7 +14,7 @@ namespace BLL
         private Session _session;
         public int appid { get; set; }
         public string appname { get; set; }
-        public string adminuserid { get; set; }
+        public long adminuserid { get; set; }
 
         public IList<Building> _builds { get; set; }
         public IList<User> _users { get; set; }

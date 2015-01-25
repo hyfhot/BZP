@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="ef23bf87582b4ed3adf79378fb0e61e6" Name="Diagram1">
-        <EntityTypeShape EntityType="GJPModel.appaccount" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="GJPModel.building" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="GJPModel.calcconfig" Width="1.5" PointX="4.75" PointY="0.75" />
         <EntityTypeShape EntityType="GJPModel.calcvaluelog" Width="1.5" PointX="0.75" PointY="4.75" />
@@ -16,8 +15,9 @@
         <EntityTypeShape EntityType="GJPModel.rentmonth" Width="1.5" PointX="8.75" PointY="0.75" />
         <EntityTypeShape EntityType="GJPModel.role" Width="1.5" PointX="8.75" PointY="5.75" />
         <EntityTypeShape EntityType="GJPModel.rooms" Width="1.5" PointX="8.75" PointY="8.75" />
-        <EntityTypeShape EntityType="GJPModel.session" Width="1.5" PointX="10.75" PointY="0.75" />
         <EntityTypeShape EntityType="GJPModel.user" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="GJPModel.session" Width="1.5" PointX="3.375" PointY="10.75" />
+        <EntityTypeShape EntityType="GJPModel.appaccount" Width="1.5" PointX="11.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

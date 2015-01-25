@@ -25,7 +25,6 @@ namespace DAL
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<appaccount> appaccount { get; set; }
         public DbSet<building> building { get; set; }
         public DbSet<calcconfig> calcconfig { get; set; }
         public DbSet<calcvaluelog> calcvaluelog { get; set; }
@@ -36,7 +35,8 @@ namespace DAL
         public DbSet<rentmonth> rentmonth { get; set; }
         public DbSet<role> role { get; set; }
         public DbSet<rooms> rooms { get; set; }
-        public DbSet<session> session { get; set; }
         public DbSet<user> user { get; set; }
+        public DbSet<session> session { get; set; }
+        public DbSet<appaccount> appaccount { get; set; }
     }
 }

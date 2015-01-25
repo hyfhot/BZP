@@ -30,5 +30,6 @@ namespace DAL
         public Nullable<decimal> payment { get; set; }
         public string description { get; set; }
         public short STATUS { get; set; }
+        public long customerid { get; set; }
     }
 }
